@@ -1,0 +1,11 @@
+####
+# This Dockerfile is used in order to build a container that runs the Quarkus application in native (no JVM) mode.
+#
+# docker build -f src/main/docker/Dockerfile.graalbase -t graalbase:22.3.0 .
+#
+###
+FROM ghcr.io/graalvm/graalvm-ce:22.3.0 AS build
+RUN gu install native-image
+WORKDIR /project
+VOLUME ["/project"]
+ENTRYPOINT ["native-image"]
